@@ -1,15 +1,19 @@
-// list-view-router.js
 const express = require('express');
-const router = express.Router();
+const listViewRouter = express.Router();
 
-// Ruta para listar tareas completas
-router.get('/complete', (req, res) => {
-  // Lógica para listar tareas completas
+// Middleware para validar parámetros
+listViewRouter.param('taskId', (req, res, next, taskId) => {
+  // Agrega validaciones para el parámetro taskId según tus requisitos.
+  // Puedes verificar si taskId es válido o si existe en la base de datos.
+
+  if (taskIdIsValid) {
+    req.taskId = taskId; // Puedes agregar taskId a la solicitud para su uso posterior.
+    next();
+  } else {
+    res.status(400).send('Bad Request: El parámetro taskId no es válido.');
+  }
 });
 
-// Ruta para listar tareas incompletas
-router.get('/incomplete', (req, res) => {
-  // Lógica para listar tareas incompletas
-});
+// Agrega rutas y lógica para el "list-view-router".....
 
-module.exports = router;
+module.exports = listViewRouter;

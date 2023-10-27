@@ -1,21 +1,30 @@
-// list-edit-router.js
 const express = require('express');
-const router = express.Router();
+const listEditRouter = express.Router();
 
-// Ruta para crear una tarea
-router.post('/create', (req, res) => {
-  // Lógica para crear una tarea
+// Middleware para manejar errores en solicitudes POST
+listEditRouter.post('/create', (req, res, next) => {
+  if (!req.body || Object.keys(req.body).length === 0) {
+    return res.status(400).send('Bad Request: El cuerpo de la solicitud está vacío.');
+  }
+
+  // Agrega validaciones adicionales para los atributos de las tareas según tus requisitos.
+  // Por ejemplo, puedes verificar que req.body tenga los atributos requeridos.
+
+  next();
 });
 
-// Ruta para eliminar una tarea
-router.delete('/delete/:taskId', (req, res) => {
-  // Lógica para eliminar una tarea por su ID
+// Middleware para manejar errores en solicitudes PUT
+listEditRouter.put('/update', (req, res, next) => {
+  if (!req.body || Object.keys(req.body).length === 0) {
+    return res.status(400).send('Bad Request: El cuerpo de la solicitud está vacío.');
+  }
+
+  // Agrega validaciones adicionales para los atributos de las tareas según tus requisitos.
+  // Por ejemplo, puedes verificar que req.body tenga los atributos requeridos.
+
+  next();
 });
 
-// Ruta para actualizar una tarea
-router.put('/update/:taskId', (req, res) => {
-  // Lógica para actualizar una tarea por su ID
-});
+// Agrega el router "list-edit-router" a tu aplicación principal de Express.
 
-module.exports = router;
-
+module.exports = listEditRouter;
